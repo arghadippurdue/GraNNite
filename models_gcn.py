@@ -41,8 +41,8 @@ class GCN_StaGr(torch.nn.Module):
         norm = norm * adjacency
 
         ## Layers
-        self.gcn1 = GraphConvLayer_v4(num_features, 64, norm)
-        self.gcn2 = GraphConvLayer_v4(64, num_classes, norm)
+        self.gcn1 = GraphConvLayer_StaGr(num_features, 64, norm)
+        self.gcn2 = GraphConvLayer_StaGr(64, num_classes, norm)
 
     def forward(self, x):
         h = self.gcn1(x).relu()
@@ -69,8 +69,8 @@ class GCN_GrAd_NodePad(torch.nn.Module):
         super().__init__()
 
         ## Layers
-        self.gcn1 = GraphConvLayer_v6(num_features, 64)
-        self.gcn2 = GraphConvLayer_v6(64, num_classes)
+        self.gcn1 = GraphConvLayer_GrAd_NodePad(num_features, 64)
+        self.gcn2 = GraphConvLayer_GrAd_NodePad(64, num_classes)
 
     def forward(self, x, norm):
         h = self.gcn1(x, norm).relu()
